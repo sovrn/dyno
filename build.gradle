@@ -1,5 +1,6 @@
 plugins {
     id 'nebula.netflixoss' version '3.2.3'
+    id 'nebula.maven-publish' version '4.8.1'
 }
 
 // Establish version and status
@@ -13,14 +14,35 @@ subprojects {
     apply plugin: 'nebula.netflixoss'
     apply plugin: 'java'
     apply plugin: 'idea'
-    apply plugin: 'eclipse'    
+    apply plugin: 'eclipse'
+    apply plugin: 'maven-publish'
+//  appply plugin: 'nebula.maven-base-publish'
+    version = "1.4.6.1-sovrn"  
 
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
 
-    repositories {
-        jcenter()
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
     }
+    repositories {
+        maven {
+            url "http://nexus1.dfw2.lijit.com/content/groups/public/"
+        }
+    }
+}
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+
+    repositories {
+	maven {
+              url "http://nexus1.dfw2.lijit.com/content/groups/public/"
+    	}
+    }
+    
     group = "com.netflix.${githubProjectName}"
 
     dependencies {
