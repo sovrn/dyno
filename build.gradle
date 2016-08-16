@@ -13,25 +13,13 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'eclipse'
-    apply plugin: 'maven-publish'
-//  apply plugin: 'nebula.maven-base-publish'
-    version = "1.4.6.1-sovrn"  
-
-    sourceCompatibility = 1.7
-    targetCompatibility = 1.7
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
+    apply plugin: 'maven'
+    if (project.hasProperty('projVersion')) {
+      project.version = project.projVersion
+    } else {
+      project.version = '1.4.6.1'
     }
-    repositories {
-        maven {
-            url "./repo"
-        }
-    }
-}
+
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
 
@@ -52,8 +40,19 @@ publishing {
         compile "com.sun.jersey:jersey-core:1.11"
         testCompile "junit:junit:4.11"
     }
-}
 
+
+    uploadArchives {
+        repositories {
+           mavenDeployer {
+                 repository(url: "http://nexus1.dfw2.lijit.com/content/repositories/releases/") {
+                 authentication(userName: 'deployment', password: 'deployment123')
+                 }
+           }
+        }
+    }
+
+}
 project(':dyno-core') {
     apply plugin: 'osgi'
     apply plugin: 'project-report'
