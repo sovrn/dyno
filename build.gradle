@@ -17,7 +17,7 @@ subprojects {
     if (project.hasProperty('projVersion')) {
       project.version = project.projVersion
     } else {
-      project.version = '1.4.6.1'
+      project.version = '1.4.6.1-SNAPSHOT'
     }
 
     sourceCompatibility = 1.7
@@ -46,6 +46,9 @@ subprojects {
         repositories {
            mavenDeployer {
                  repository(url: "http://nexus1.dfw2.lijit.com/content/repositories/releases/") {
+                 authentication(userName: 'deployment', password: 'deployment123')
+                 }
+                 snapshotRepository(url: "http://nexus1.dfw2.lijit.com/content/repositories/snapshots/") {
                  authentication(userName: 'deployment', password: 'deployment123')
                  }
            }
