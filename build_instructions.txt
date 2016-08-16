@@ -1,0 +1,9 @@
+To build snapshot version and push to nexus repo:
+git pull origin issue_50
+git push
+gradle clean -x javadoc -x bintrayUpload -x artifactoryPublish -x release upload
+
+To build release version and upload to nexus repo:
+git pull origin issue_50
+git push
+gradle clean -x javadoc -x bintrayUpload -x artifactoryPublish -x release upload PprojVersion=1.4.6.1   <--New version number
