@@ -17,7 +17,7 @@ subprojects {
     if (project.hasProperty('projVersion')) {
       project.version = project.projVersion
     } else {
-      project.version = '1.4.6.1-SNAPSHOT'
+      project.version = '1.4.6.X-SNAPSHOT'
     }
 
     sourceCompatibility = 1.7
